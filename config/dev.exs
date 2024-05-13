@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :budget_tracker, BudgetTracker.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "bd_tracker",
+  password: "bd_tracker",
   hostname: "localhost",
   database: "budget_tracker_dev",
   stacktrace: true,
