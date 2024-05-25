@@ -9,6 +9,12 @@ defmodule BudgetTracker.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
+    field :first_name, :string
+    field :last_name, :string
+    field :gender, :string
+    field :birthdate, :naive_datetime
+    field :role, Ecto.Enum, values: [:admin, :member, :guest]
+
     timestamps(type: :utc_datetime)
   end
 
