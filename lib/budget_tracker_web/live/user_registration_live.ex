@@ -36,7 +36,7 @@ defmodule BudgetTrackerWeb.UserRegistrationLive do
         <.input field={@form[:first_name]} type="text" label="First name" />
         <.input field={@form[:last_name]} type="text" label="Last name" />
         <.input field={@form[:gender]} type="text" label="Gender" />
-        <.input field={@form[:birthdate]} type="text" label="Birthdate" />
+        <.input field={@form[:birthdate]} type="datetime-local" label="Birthdate" />
 
         <:actions>
           <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
