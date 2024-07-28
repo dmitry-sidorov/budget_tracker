@@ -212,6 +212,15 @@ defmodule BudgetTrackerWeb.CoreComponents do
     """
   end
 
+  defp button_color_class(purpose) do
+    case purpose do
+      :primary -> "bg-emerald-500 hover:bg-emerald-400"
+      :secondary -> "bg-blue-500 hover:bg-blue-400"
+      :cancel -> "bg-red-400 hover:bg-red-300"
+      nil -> "bg-zinc-900 hover:bg-zinc-700"
+    end
+  end
+
   @doc """
   Renders a button.
 
@@ -222,6 +231,7 @@ defmodule BudgetTrackerWeb.CoreComponents do
   """
   attr :type, :string, default: nil
   attr :class, :string, default: nil
+  attr :purpose, :atom, default: nil
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
@@ -231,9 +241,9 @@ defmodule BudgetTrackerWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
+        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
         "text-sm font-semibold leading-6 text-white active:text-white/80",
-        @class
+        button_color_class(@purpose)
       ]}
       {@rest}
     >
@@ -295,6 +305,7 @@ defmodule BudgetTrackerWeb.CoreComponents do
 
   def input(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     field.errors |> dbg()
+
     assigns
     |> assign(field: nil, id: assigns.id || field.id)
     |> assign(:errors, Enum.map(field.errors, &translate_error(&1)))

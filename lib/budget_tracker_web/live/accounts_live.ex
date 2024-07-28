@@ -10,11 +10,30 @@ defmodule BudgetTrackerWeb.AccountsLive do
         <span class="w-48">Currency: USD</span>
       </div>
       <div class="flex gap-10 mr-5">
-        <.button class="h-12 w-48 bg-emerald-500">Add new income</.button>
-        <.button class="h-12 w-48 bg-blue-500">Add new payment</.button>
+        <.button
+          class="h-12 w-48 rounded-lg hover:bg-emerald-400"
+          phx-click="add_income"
+          purpose={:primary}
+        >
+          Add new income
+        </.button>
+        <.button class="h-12 w-48 rounded-lg" phx-click="add_payment" purpose={:secondary}>
+          Add new payment
+        </.button>
       </div>
     </div>
     """
+  end
+
+  def handle_event("add_income", _unsigned_params, socket) do
+    IO.puts("Add income event!")
+    socket = assign(socket, show_new_income_modal: true)
+    {:noreply, socket}
+  end
+
+  def handle_event("add_payment", _unsigned_params, socket) do
+    IO.puts("Add payment event!")
+    {:noreply, socket}
   end
 
   def render(assigns) do
@@ -23,10 +42,17 @@ defmodule BudgetTrackerWeb.AccountsLive do
       <.account />
       <.account />
     </div>
+    <.modal id="add-payment-modal" show={assigns.show_new_income_modal}>
+      <div>Add new payment</div>
+    </.modal>
     """
   end
 
   def mount(_params, _session, socket) do
+    socket =
+      assign(socket, show_new_payment_modal: false)
+      |> assign(show_new_income_modal: false)
+
     {:ok, socket}
   end
 end
