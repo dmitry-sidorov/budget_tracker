@@ -243,7 +243,8 @@ defmodule BudgetTrackerWeb.CoreComponents do
       class={[
         "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
         "text-sm font-semibold leading-6 text-white active:text-white/80",
-        button_color_class(@purpose)
+        button_color_class(@purpose),
+        @class
       ]}
       {@rest}
     >
