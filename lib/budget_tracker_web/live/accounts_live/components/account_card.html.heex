@@ -1,0 +1,22 @@
+<div class="box-content flex items-center border-2 border-black h-36 w-fit rounded-xl bg-slate-200">
+  <div class="flex flex-col ml-5 min-w-36 sm:min-w-72 max-w-96 shrink">
+    <%= for {name, value} <- [{"Account", @title}, {"Amount", @amount}, {"Currency", @currency}] do %>
+      <span class="flex flex-col sm:flex-row sm:gap-1">
+        <span class="font-bold"><%= name %>:</span>
+        <span><%= value %></span>
+      </span>
+    <% end %>
+  </div>
+  <div class="flex flex-col gap-3 mr-5">
+    <.button
+      class="h-12 w-36 rounded-lg hover:bg-emerald-400"
+      phx-click="add_income"
+      purpose={:primary}
+    >
+      +1 Income
+    </.button>
+    <.button class="h-12 w-36 rounded-lg" phx-click="add_payment" purpose={:secondary}>
+      +1 Payment
+    </.button>
+  </div>
+</div>
