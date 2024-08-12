@@ -1,4 +1,5 @@
 defmodule BudgetTracker.Accounts.User do
+  alias BudgetTracker.DebitAccounts.DebitAccount
   use Ecto.Schema
   import Ecto.Changeset
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -14,6 +15,7 @@ defmodule BudgetTracker.Accounts.User do
     field :gender, :string
     field :birthdate, :naive_datetime
     field :role, Ecto.Enum, values: [:admin, :member, :guest]
+    has_many :debit_accounts, DebitAccount
 
     timestamps(type: :utc_datetime)
   end
