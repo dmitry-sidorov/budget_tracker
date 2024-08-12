@@ -9,7 +9,7 @@ defmodule BudgetTracker.DebitAccounts.DebitAccount do
     field :title, :string
     field :last_update, :date
     field :amount, :float
-    belongs_to :account, User
+    belongs_to :user, User
     has_one :currency, Currency
 
     timestamps(type: :utc_datetime)

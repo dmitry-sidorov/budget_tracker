@@ -10,13 +10,13 @@ defmodule BudgetTracker.Repo.Migrations.CreateDebitAccounts do
       add :last_update, :date
       add :amount, :float
       add :currency_id, references(:currencies, on_delete: :nothing, type: :binary_id)
-      add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id)
+      add :user_id, references(:users, on_delete: :nothing, type: :binary_id)
       add :type, :debit_account_type
 
       timestamps(type: :utc_datetime)
     end
 
     create index(:debit_accounts, [:currency_id])
-    create index(:debit_accounts, [:account_id])
+    create index(:debit_accounts, [:user_id])
   end
 end
