@@ -1,4 +1,5 @@
 defmodule BudgetTracker.Currencies.Currency do
+  alias BudgetTracker.DebitAccounts.DebitAccount
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -6,6 +7,7 @@ defmodule BudgetTracker.Currencies.Currency do
   @foreign_key_type :binary_id
   schema "currencies" do
     field :title, :string
+    has_many :debit_account, DebitAccount
 
     timestamps(type: :utc_datetime)
   end

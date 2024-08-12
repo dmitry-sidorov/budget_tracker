@@ -3,7 +3,7 @@ defmodule BudgetTrackerWeb.AccountsLive do
 
   embed_templates "components/*"
 
-  attr :amount, :string, required: true
+  attr :amount, :float, required: true
   attr :currency, :string, required: true
   attr :title, :string, required: true
   def account_card(assigns)
