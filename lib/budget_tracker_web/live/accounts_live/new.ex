@@ -5,24 +5,45 @@ defmodule BudgetTrackerWeb.NewDebitAccountLive do
     assigns |> dbg()
 
     ~H"""
-    <.simple_form for={@form}>
-      <.input
-        field={@form[:debit_account].title}
-        type="text"
-        placeholder="Debit account title"
-        required
-      />
-      <:actions>
-        <.button phx-disable-with="Sending..." class="w-full">
-          Resend confirmation instructions
-        </.button>
-      </:actions>
-    </.simple_form>
+    <div class="mx-auto max-w-sm">
+      <.simple_form for={@form}>
+        <.input field={@form[:title]} type="text" placeholder="Debit account title" required />
+        <.input
+          field={@form[:type]}
+          type="select"
+          placeholder="Type"
+          required
+          options={["card", "cash"]}
+        />
+        <.input field={@form[:amount]} type="text" placeholder="Debit account title" required />
+        <.input
+          field={@form[:currency]}
+          type="select"
+          placeholder="Currency"
+          required
+          options={["USD", "BYN", "EUR"]}
+        />
+        <:actions>
+          <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
+            Add new debit account
+          </.button>
+        </:actions>
+      </.simple_form>
+    </div>
     """
   end
 
   def mount(_params, _session, socket) do
-    socket = assign(socket, :form, to_form(%{"title" => nil}, as: "debit_account")) |> dbg()
+    socket =
+      assign(
+        socket,
+        :form,
+        to_form(%{"title" => nil, "type" => "card", "amount" => 0, "currency" => "USD"},
+          as: "debit_account"
+        )
+      )
+      |> dbg()
+
     {:ok, socket}
   end
 end
