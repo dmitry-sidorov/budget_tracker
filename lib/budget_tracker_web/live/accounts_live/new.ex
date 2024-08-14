@@ -7,19 +7,13 @@ defmodule BudgetTrackerWeb.NewDebitAccountLive do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.simple_form for={@form}>
-        <.input field={@form[:title]} type="text" placeholder="Debit account title" required />
-        <.input
-          field={@form[:type]}
-          type="select"
-          placeholder="Type"
-          required
-          options={["card", "cash"]}
-        />
-        <.input field={@form[:amount]} type="text" placeholder="Debit account title" required />
+        <.input field={@form[:title]} type="text" label="Title" required />
+        <.input field={@form[:type]} type="select" label="Type" required options={["card", "cash"]} />
+        <.input field={@form[:amount]} type="text" label="Initial amount" required />
         <.input
           field={@form[:currency]}
           type="select"
-          placeholder="Currency"
+          label="Currency"
           required
           options={["USD", "BYN", "EUR"]}
         />
