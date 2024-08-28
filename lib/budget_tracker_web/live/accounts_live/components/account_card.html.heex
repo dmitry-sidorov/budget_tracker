@@ -10,12 +10,24 @@
   <div class="flex flex-col gap-3 mr-5">
     <.button
       class="h-12 w-36 rounded-lg hover:bg-emerald-400"
-      phx-click="add_income"
+      phx-click={
+        JS.push("add_income")
+        |> show_modal(@new_income_modal_name)
+      }
+      phx-value-payload={@debit_account_id}
       purpose={:primary}
     >
       +1 Income
     </.button>
-    <.button class="h-12 w-36 rounded-lg" phx-click="add_payment" purpose={:secondary}>
+    <.button
+      class="h-12 w-36 rounded-lg"
+      phx-click={
+        JS.push("add_payment")
+        |> show_modal(@new_payment_modal_name)
+      }
+      phx-value-payload={@debit_account_id}
+      purpose={:secondary}
+    >
       +1 Payment
     </.button>
   </div>
