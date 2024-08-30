@@ -49,10 +49,62 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
         />
       </div>
       <.modal id={@new_income_modal_name}>
-        <div>Add new income id: (<%= @debit_account_id %>)</div>
+        <div>
+          New income
+          <.simple_form for={@new_income_form}>
+            <.input field={@new_income_form[:title]} type="text" label="Title" required />
+            <.input field={@new_income_form[:amount]} type="text" label="Initial amount" required />
+            <.input field={@new_income_form[:currency]} disabled label="Currency" required />
+            <.input field={@new_income_form[:target]} disabled label="Target" required />
+            <.input
+              field={@new_income_form[:date]}
+              type="datetime-local"
+              disabled
+              label="Date"
+              required
+            />
+            <:actions>
+              <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
+                Add new debit account
+              </.button>
+              <.button phx-disable-with="Sending..." class="w-full" purpose={:cancel}>
+                Cancel
+              </.button>
+            </:actions>
+          </.simple_form>
+        </div>
       </.modal>
       <.modal id={@new_payment_modal_name}>
-        <div>Add new payment id: (<%= @debit_account_id %>)</div>
+        <div>
+          New payment
+          <.simple_form for={@new_payment_form}>
+            <.input field={@new_payment_form[:title]} type="text" label="Title" required />
+            <.input field={@new_payment_form[:amount]} type="text" label="Initial amount" required />
+            <.input field={@new_payment_form[:currency]} disabled label="Currency" required />
+            <.input field={@new_payment_form[:source]} disabled label="Source" required />
+            <.input
+              field={@new_payment_form[:date]}
+              type="datetime-local"
+              disabled
+              label="Date"
+              required
+            />
+            <.input
+              type="select"
+              field={@new_income_form[:category]}
+              label="Category"
+              options={["Groceries", "Auto"]}
+            />
+            <:actions>
+              <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
+                Add new payment
+              </.button>
+              <.button class="w-full" purpose={:cancel}>
+                Cancel
+              </.button>
+            </:actions>
+          </.simple_form>
+        </div>
       </.modal>
     </div>
     """
@@ -65,6 +117,33 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
       |> assign(debit_account_id: nil)
       |> assign(new_income_modal_name: @new_income_modal_name)
       |> assign(new_payment_modal_name: @new_payment_modal_name)
+      |> assign(
+        :new_income_form,
+        to_form(
+          %{
+            "title" => nil,
+            "amount" => 0,
+            "currency" => "USD",
+            "target" => "Текущий счёт",
+            "date" => DateTime.utc_now()
+          },
+          as: "debit_account"
+        )
+      )
+      |> assign(
+        :new_payment_form,
+        to_form(
+          %{
+            "title" => nil,
+            "amount" => 0,
+            "currency" => "USD",
+            "source" => "Тот счёт",
+            "date" => DateTime.utc_now(),
+            "category" => "Groceries"
+          },
+          as: "debit_account"
+        )
+      )
       |> assign(show: false)
 
     {:ok, socket}
