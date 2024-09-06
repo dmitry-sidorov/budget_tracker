@@ -14,14 +14,14 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
   attr :new_payment_modal_name, :string, default: @new_payment_modal_name
   def account_card(assigns)
 
-  def handle_event("add_income", unsigned_params, socket) do
+  def handle_event(@new_income_modal_name, unsigned_params, socket) do
     IO.puts("Add income event!")
     unsigned_params |> dbg()
     socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
   end
 
-  def handle_event("add_payment", unsigned_params, socket) do
+  def handle_event(@new_payment_modal_name, unsigned_params, socket) do
     IO.puts("Add payment event!")
     socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
@@ -67,7 +67,12 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
               <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
                 Add new debit account
               </.button>
-              <.button phx-disable-with="Sending..." class="w-full" purpose={:cancel}>
+              <.button
+                phx-disable-with="Sending..."
+                class="w-full"
+                purpose={:cancel}
+                phx-click={hide_modal(@new_income_modal_name)}
+              >
                 Cancel
               </.button>
             </:actions>
@@ -99,7 +104,11 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
               <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
                 Add new payment
               </.button>
-              <.button class="w-full" purpose={:cancel}>
+              <.button
+                class="w-full"
+                purpose={:cancel}
+                phx-click={hide_modal(@new_payment_modal_name)}
+              >
                 Cancel
               </.button>
             </:actions>

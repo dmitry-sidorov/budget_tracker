@@ -11,7 +11,7 @@
     <.button
       class="h-12 w-36 rounded-lg hover:bg-emerald-400"
       phx-click={
-        JS.push("add_income")
+        JS.push(@new_income_modal_name)
         |> show_modal(@new_income_modal_name)
       }
       phx-value-payload={@debit_account_id}
@@ -22,7 +22,7 @@
     <.button
       class="h-12 w-36 rounded-lg"
       phx-click={
-        JS.push("add_payment")
+        JS.push(@new_payment_modal_name)
         |> show_modal(@new_payment_modal_name)
       }
       phx-value-payload={@debit_account_id}
