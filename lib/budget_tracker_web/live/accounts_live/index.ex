@@ -33,6 +33,12 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
     {:noreply, socket}
   end
 
+  def handle_event("delete-debit-account", unsigned_params, socket) do
+    IO.puts("delete_debit_account!")
+    unsigned_params |> dbg()
+    {:noreply, socket}
+  end
+
   def render(assigns) do
     ~H"""
     <div class="flex flex-col items-center gap-5">
@@ -47,6 +53,11 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
           title="Текущий аккаунт"
           debit_account_id={999}
         />
+        <div class="box-content flex items-center border-2 border-black h-36 rounded-xl bg-slate-100">
+          <div class="flex flex-col ml-5 font-bold">
+            Add new debit account
+          </div>
+        </div>
       </div>
       <.modal id={@new_income_modal_name}>
         <div>
