@@ -9,7 +9,8 @@
   </div>
   <div class="flex flex-col gap-3 mr-5">
     <.button
-      class="h-12 w-36 rounded-lg hover:bg-emerald-400"
+      color="success"
+      class="h-12 w-36 rounded-lg"
       phx-click={
         JS.push(@new_income_modal_name)
         |> show_modal(@new_income_modal_name)
@@ -20,6 +21,7 @@
       +1 Income
     </.button>
     <.button
+      color="info"
       class="h-12 w-36 rounded-lg"
       phx-click={
         JS.push(@new_payment_modal_name)

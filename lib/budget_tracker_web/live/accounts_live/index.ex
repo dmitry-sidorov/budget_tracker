@@ -59,72 +59,68 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
           </div>
         </div>
       </div>
-      <.modal id={@new_income_modal_name}>
-        <div>
-          New income
-          <.simple_form for={@new_income_form}>
-            <.input field={@new_income_form[:title]} type="text" label="Title" required />
-            <.input field={@new_income_form[:amount]} type="text" label="Initial amount" required />
-            <.input field={@new_income_form[:currency]} disabled label="Currency" required />
-            <.input field={@new_income_form[:target]} disabled label="Target" required />
-            <.input
-              field={@new_income_form[:date]}
-              type="datetime-local"
-              disabled
-              label="Date"
-              required
-            />
-            <:actions>
-              <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
-                Add new debit account
-              </.button>
-              <.button
-                phx-disable-with="Sending..."
-                class="w-full"
-                purpose={:cancel}
-                phx-click={hide_modal(@new_income_modal_name)}
-              >
-                Cancel
-              </.button>
-            </:actions>
-          </.simple_form>
-        </div>
+      <.modal title="New income" id={@new_income_modal_name}>
+        <.simple_form for={@new_income_form}>
+          <.input field={@new_income_form[:title]} type="text" label="Title" required />
+          <.input field={@new_income_form[:amount]} type="text" label="Initial amount" required />
+          <.input field={@new_income_form[:currency]} disabled label="Currency" required />
+          <.input field={@new_income_form[:target]} disabled label="Target" required />
+          <.input
+            field={@new_income_form[:date]}
+            type="datetime-local"
+            disabled
+            label="Date"
+            required
+          />
+          <:actions>
+            <.button color="success" phx-disable-with="Sending..." class="w-full" purpose={:primary}>
+              Add new debit account
+            </.button>
+            <.button
+              color="danger"
+              phx-disable-with="Sending..."
+              class="w-full"
+              purpose={:cancel}
+              phx-click={hide_modal(@new_income_modal_name)}
+            >
+              Cancel
+            </.button>
+          </:actions>
+        </.simple_form>
       </.modal>
-      <.modal id={@new_payment_modal_name}>
-        <div>
-          New payment
-          <.simple_form for={@new_payment_form}>
-            <.input field={@new_payment_form[:title]} type="text" label="Title" required />
-            <.input field={@new_payment_form[:amount]} type="text" label="Initial amount" required />
-            <.input field={@new_payment_form[:currency]} disabled label="Currency" required />
-            <.input field={@new_payment_form[:source]} disabled label="Source" required />
-            <.input
-              field={@new_payment_form[:date]}
-              type="datetime-local"
-              disabled
-              label="Date"
-              required
-            />
-            <.input
-              type="select"
-              field={@new_income_form[:category]}
-              label="Category"
-              options={["Groceries", "Auto"]}
-            />
-            <:actions>
-              <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
-                Add new payment
-              </.button>
-              <.button
-                class="w-full"
-                purpose={:cancel}
-                phx-click={hide_modal(@new_payment_modal_name)}
-              >
-                Cancel
-              </.button>
-            </:actions>
-          </.simple_form>
-        </div>
+      <.modal title="New payment" id={@new_payment_modal_name}>
+        <.simple_form for={@new_payment_form}>
+          <.input field={@new_payment_form[:title]} type="text" label="Title" required />
+          <.input field={@new_payment_form[:amount]} type="text" label="Initial amount" required />
+          <.input field={@new_payment_form[:currency]} disabled label="Currency" required />
+          <.input field={@new_payment_form[:source]} disabled label="Source" required />
+          <.input
+            field={@new_payment_form[:date]}
+            type="datetime-local"
+            disabled
+            label="Date"
+            required
+          />
+          <.input
+            type="select"
+            field={@new_income_form[:category]}
+            label="Category"
+            options={["Groceries", "Auto"]}
+          />
+          <:actions>
+            <.button color="success" phx-disable-with="Sending..." class="w-full" purpose={:primary}>
+              Add new payment
+            </.button>
+            <.button
+              color="danger"
+              class="w-full"
+              purpose={:cancel}
+              phx-click={hide_modal(@new_payment_modal_name)}
+            >
+              Cancel
+            </.button>
+          </:actions>
+        </.simple_form>
       </.modal>
     </div>
     """

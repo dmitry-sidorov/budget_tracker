@@ -44,7 +44,7 @@ defmodule BudgetTrackerWeb.Components.MishkaComponents do
       import BudgetTrackerWeb.Components.List, only: [list: 1, li: 1, ul: 1, ol: 1, list_group: 1]
       import BudgetTrackerWeb.Components.MegaMenu, only: [mega_menu: 1]
       import BudgetTrackerWeb.Components.Menu, only: [menu: 1]
-      # import BudgetTrackerWeb.Components.Modal, only: [modal: 1]
+      import BudgetTrackerWeb.Components.Modal, only: [modal: 1]
 
       import BudgetTrackerWeb.Components.NativeSelect,
         only: [native_select: 1, select_option_group: 1]
