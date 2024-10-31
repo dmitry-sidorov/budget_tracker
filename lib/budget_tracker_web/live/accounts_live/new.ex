@@ -18,9 +18,14 @@ defmodule BudgetTrackerWeb.NewDebitAccountLive do
           options={["USD", "BYN", "EUR"]}
         />
         <:actions>
-          <.button phx-disable-with="Sending..." class="w-full" purpose={:primary}>
-            Add new debit account
+          <.button color="success" phx-disable-with="Sending..." class="w-full">
+            Create
           </.button>
+          <.link patch={~p"/debit_accounts"}>
+            <.button color="danger" class="w-full">
+              Cancel
+            </.button>
+          </.link>
         </:actions>
       </.simple_form>
     </div>

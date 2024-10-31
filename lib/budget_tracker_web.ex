@@ -84,8 +84,24 @@ defmodule BudgetTrackerWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
-      import BudgetTrackerWeb.CoreComponents
+      import BudgetTrackerWeb.CoreComponents,
+        only: [
+          header: 1,
+          simple_form: 1,
+          input: 1,
+          error: 1,
+          flash_group: 1,
+          flash: 1,
+          hide_modal: 1,
+          hide_modal: 2,
+          show_modal: 1,
+          show_modal: 2,
+          delete_icon: 1
+        ]
+
       import BudgetTrackerWeb.Gettext
+
+      use BudgetTrackerWeb.Components.MishkaComponents
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
