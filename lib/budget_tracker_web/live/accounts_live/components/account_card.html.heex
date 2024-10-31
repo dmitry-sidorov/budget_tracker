@@ -1,4 +1,4 @@
-<div class="box-content flex items-center border-2 border-black h-36 w-fit rounded-xl bg-slate-200">
+<.card class="box-content flex items-center border-1 border-black h-36 w-fit rounded-xl bg-slate-200">
   <div class="flex flex-col ml-5 min-w-36 sm:min-w-72 max-w-96 shrink">
     <%= for {name, value} <- [{"Account", @title}, {"Amount", @amount}, {"Currency", @currency}] do %>
       <span class="flex flex-col sm:flex-row sm:gap-1">
@@ -16,7 +16,6 @@
         |> show_modal(@new_income_modal_name)
       }
       phx-value-payload={@debit_account_id}
-      purpose={:primary}
     >
       +1 Income
     </.button>
@@ -28,12 +27,11 @@
         |> show_modal(@new_payment_modal_name)
       }
       phx-value-payload={@debit_account_id}
-      purpose={:secondary}
     >
       +1 Payment
     </.button>
   </div>
-  <div class="mr-4" phx-click="delete_debit_account" phx-value-payload={@debit_account_id}>
+  <div class="mr-4 cursor-pointer" phx-click="delete_debit_account" phx-value-payload={@debit_account_id}>
     <.delete_icon />
   </div>
-</div>
+</.card>
