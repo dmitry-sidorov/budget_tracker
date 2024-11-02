@@ -35,7 +35,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
 
   def handle_event("delete_debit_account", unsigned_params, socket) do
     IO.puts("delete_debit_account!")
-    unsigned_params |> dbg()
+    unsigned_params
     {:noreply, socket}
   end
 

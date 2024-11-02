@@ -70,6 +70,7 @@ defmodule BudgetTrackerWeb.Router do
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/debit_accounts", DebitAccountsLive, :index
       live "/debit_accounts/new", NewDebitAccountLive, :index
+      live "/categories", CategoriesLive.Show, :show
     end
   end
 
