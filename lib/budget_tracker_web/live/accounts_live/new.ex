@@ -2,8 +2,6 @@ defmodule BudgetTrackerWeb.NewDebitAccountLive do
   use BudgetTrackerWeb, :live_view
 
   def render(assigns) do
-    assigns |> dbg()
-
     ~H"""
     <div class="mx-auto max-w-sm">
       <.simple_form for={@form}>
@@ -41,7 +39,6 @@ defmodule BudgetTrackerWeb.NewDebitAccountLive do
           as: "debit_account"
         )
       )
-      |> dbg()
 
     {:ok, socket}
   end
