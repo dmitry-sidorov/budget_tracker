@@ -14,7 +14,7 @@ defmodule BudgetTracker.Accounts.User do
     field :last_name, :string
     field :gender, :string
     field :birthdate, :naive_datetime
-    field :role, Ecto.Enum, values: [:admin, :member, :guest]
+    field :role, Ecto.Enum, values: [:admin, :member], default: :member
     has_many :debit_accounts, DebitAccount
 
     timestamps(type: :utc_datetime)

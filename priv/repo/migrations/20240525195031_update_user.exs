@@ -2,7 +2,7 @@ defmodule BudgetTracker.Repo.Migrations.UpdateUser do
   use Ecto.Migration
 
   def change do
-    execute("CREATE TYPE user_role AS ENUM ('admin', 'member', 'guest')")
+    execute("CREATE TYPE user_role AS ENUM ('admin', 'member')")
 
     alter table(:users) do
       add :first_name, :string
