@@ -16,7 +16,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
 
   def handle_event(@new_income_modal_name, unsigned_params, socket) do
     IO.puts("Add income event!")
-    unsigned_params |> dbg()
+    unsigned_params
     socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
   end
@@ -35,7 +35,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
 
   def handle_event("delete_debit_account", unsigned_params, socket) do
     IO.puts("delete_debit_account!")
-    unsigned_params |> dbg()
+    unsigned_params
     {:noreply, socket}
   end
 
@@ -68,7 +68,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
             required
           />
           <:actions>
-            <.button color="success" phx-submit="" class="w-full" purpose={:primary}>
+            <.button color="success" phx-submit="" class="w-full">
               Add new income
             </.button>
             <.button
