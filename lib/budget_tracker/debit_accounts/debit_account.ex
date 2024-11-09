@@ -9,6 +9,7 @@ defmodule BudgetTracker.DebitAccounts.DebitAccount do
     field :title, :string
     field :last_update, :date
     field :amount, :float
+    field :type, Ecto.Enum, values: [:card, :cash, :deposit, :saving]
     belongs_to :user, User
     has_one :currency, Currency
 
@@ -18,7 +19,7 @@ defmodule BudgetTracker.DebitAccounts.DebitAccount do
   @doc false
   def changeset(debit_account, attrs) do
     debit_account
-    |> cast(attrs, [:title, :last_update, :amount])
-    |> validate_required([:title, :last_update, :amount])
+    |> cast(attrs, [:title, :last_update, :amount, :type])
+    |> validate_required([:title, :last_update, :amount, :type])
   end
 end

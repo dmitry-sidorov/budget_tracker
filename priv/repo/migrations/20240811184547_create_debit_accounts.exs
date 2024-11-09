@@ -1,8 +1,9 @@
 defmodule BudgetTracker.Repo.Migrations.CreateDebitAccounts do
   use Ecto.Migration
+  import EctoEnumMigration
 
   def change do
-    execute("CREATE TYPE debit_account_type AS ENUM ('card', 'cash')")
+    create_type(:debit_account_type, [:card, :cash, :deposit, :saving])
 
     create table(:debit_accounts, primary_key: false) do
       add :id, :binary_id, primary_key: true
