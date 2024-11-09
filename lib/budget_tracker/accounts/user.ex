@@ -12,7 +12,7 @@ defmodule BudgetTracker.Accounts.User do
 
     field :first_name, :string
     field :last_name, :string
-    field :gender, :string
+    field :gender, Ecto.Enum, values: [:male, :female, :other]
     field :birthdate, :naive_datetime
     field :role, Ecto.Enum, values: [:admin, :member], default: :member
     has_many :debit_accounts, DebitAccount
