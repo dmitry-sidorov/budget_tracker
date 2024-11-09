@@ -61,7 +61,8 @@ defmodule BudgetTracker.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:mishka_chelekom, "~> 0.0.1", only: :dev},
-      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ecto_enum_migration, "~> 0.4"}
     ]
   end
 

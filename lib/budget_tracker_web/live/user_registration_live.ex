@@ -35,7 +35,12 @@ defmodule BudgetTrackerWeb.UserRegistrationLive do
         <.input field={@form[:password]} type="password" label="Password" required />
         <.input field={@form[:first_name]} type="text" label="First name" />
         <.input field={@form[:last_name]} type="text" label="Last name" />
-        <.input field={@form[:gender]} type="text" label="Gender" />
+        <.input
+          field={@form[:gender]}
+          label="Gender"
+          options={["male", "female", "other"]}
+          type="select"
+        />
         <.input field={@form[:birthdate]} type="datetime-local" label="Birthdate" />
 
         <:actions>

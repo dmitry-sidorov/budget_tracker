@@ -1,5 +1,6 @@
 defmodule BudgetTracker.Repo.Migrations.UpdateUser do
   use Ecto.Migration
+  import EctoEnumMigration
 
   def change do
     create_type(:user_role, [:admin, :member])
@@ -8,7 +9,6 @@ defmodule BudgetTracker.Repo.Migrations.UpdateUser do
     alter table(:users) do
       add :first_name, :string
       add :last_name, :string
-      add :gender, :string
       add :birthdate, :naive_datetime
       add :role, :user_role
       add :gender, :user_gender
