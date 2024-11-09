@@ -11,16 +11,23 @@
 # and so on) as they will fail if something goes wrong.
 
 defmodule DatabaseSeeds do
+  alias BudgetTracker.OperationCategories
   alias BudgetTracker.Currencies
   alias BudgetTracker.Repo
 
   def call(data_folder_path \\ "priv/repo/seeds") do
     seed_currencies!(data_folder_path)
+    seed_operation_categories!(data_folder_path)
   end
 
   defp seed_currencies!(path) do
     load_seed_data(path, "currencies")
     |> Enum.each(&Currencies.create_currency/1)
+  end
+
+  defp seed_operation_categories!(path) do
+    load_seed_data(path, "operation_categories")
+    |> Enum.each(&OperationCategories.create_operation_category/1)
   end
 
   defp load_seed_data(path, entity) do

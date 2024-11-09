@@ -6,7 +6,7 @@ defmodule BudgetTracker.OperationCategories.OperationCategory do
   @foreign_key_type :binary_id
   schema "operation_categories" do
     field :title, :string
-    field :is_primary, :boolean, default: false
+    field :purpose, Ecto.Enum, values: [:primary, :secondary]
 
     timestamps(type: :utc_datetime)
   end
@@ -14,7 +14,7 @@ defmodule BudgetTracker.OperationCategories.OperationCategory do
   @doc false
   def changeset(operation_category, attrs) do
     operation_category
-    |> cast(attrs, [:title, :is_primary])
-    |> validate_required([:title, :is_primary])
+    |> cast(attrs, [:title, :purpose])
+    |> validate_required([:title, :purpose])
   end
 end
