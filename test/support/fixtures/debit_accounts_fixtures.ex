@@ -13,7 +13,8 @@ defmodule BudgetTracker.DebitAccountsFixtures do
       |> Enum.into(%{
         amount: 120.5,
         last_update: ~D[2024-08-10],
-        title: "some title"
+        title: "some title",
+        type: "card"
       })
       |> BudgetTracker.DebitAccounts.create_debit_account()
 

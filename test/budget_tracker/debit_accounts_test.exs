@@ -21,9 +21,16 @@ defmodule BudgetTracker.DebitAccountsTest do
     end
 
     test "create_debit_account/1 with valid data creates a debit_account" do
-      valid_attrs = %{title: "some title", last_update: ~D[2024-08-10], amount: 120.5}
+      valid_attrs = %{
+        title: "some title",
+        last_update: ~D[2024-08-10],
+        amount: 120.5,
+        type: "card"
+      }
 
-      assert {:ok, %DebitAccount{} = debit_account} = DebitAccounts.create_debit_account(valid_attrs)
+      assert {:ok, %DebitAccount{} = debit_account} =
+               DebitAccounts.create_debit_account(valid_attrs)
+
       assert debit_account.title == "some title"
       assert debit_account.last_update == ~D[2024-08-10]
       assert debit_account.amount == 120.5
@@ -37,7 +44,9 @@ defmodule BudgetTracker.DebitAccountsTest do
       debit_account = debit_account_fixture()
       update_attrs = %{title: "some updated title", last_update: ~D[2024-08-11], amount: 456.7}
 
-      assert {:ok, %DebitAccount{} = debit_account} = DebitAccounts.update_debit_account(debit_account, update_attrs)
+      assert {:ok, %DebitAccount{} = debit_account} =
+               DebitAccounts.update_debit_account(debit_account, update_attrs)
+
       assert debit_account.title == "some updated title"
       assert debit_account.last_update == ~D[2024-08-11]
       assert debit_account.amount == 456.7
@@ -45,14 +54,20 @@ defmodule BudgetTracker.DebitAccountsTest do
 
     test "update_debit_account/2 with invalid data returns error changeset" do
       debit_account = debit_account_fixture()
-      assert {:error, %Ecto.Changeset{}} = DebitAccounts.update_debit_account(debit_account, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               DebitAccounts.update_debit_account(debit_account, @invalid_attrs)
+
       assert debit_account == DebitAccounts.get_debit_account!(debit_account.id)
     end
 
     test "delete_debit_account/1 deletes the debit_account" do
       debit_account = debit_account_fixture()
       assert {:ok, %DebitAccount{}} = DebitAccounts.delete_debit_account(debit_account)
-      assert_raise Ecto.NoResultsError, fn -> DebitAccounts.get_debit_account!(debit_account.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        DebitAccounts.get_debit_account!(debit_account.id)
+      end
     end
 
     test "change_debit_account/1 returns a debit_account changeset" do

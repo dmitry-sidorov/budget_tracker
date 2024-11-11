@@ -9,8 +9,8 @@ config :bcrypt_elixir, :log_rounds, 1
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :budget_tracker, BudgetTracker.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "bd_tracker",
+  password: "bd_tracker",
   hostname: "localhost",
   database: "budget_tracker_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
