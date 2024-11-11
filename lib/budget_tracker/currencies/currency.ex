@@ -7,7 +7,7 @@ defmodule BudgetTracker.Currencies.Currency do
   @foreign_key_type :binary_id
   schema "currencies" do
     field :title, :string
-    has_many :debit_account, DebitAccount
+    has_many :debit_accounts, DebitAccount
 
     timestamps(type: :utc_datetime)
   end

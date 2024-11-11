@@ -4,6 +4,8 @@ defmodule BudgetTracker.DebitAccounts do
   """
 
   import Ecto.Query, warn: false
+  alias BudgetTracker.Currencies.Currency
+  alias BudgetTracker.Accounts.User
   alias BudgetTracker.Repo
 
   alias BudgetTracker.DebitAccounts.DebitAccount
@@ -49,9 +51,14 @@ defmodule BudgetTracker.DebitAccounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_debit_account(attrs \\ %{}) do
+  def create_debit_account(%User{} = user, %Currency{} = currency, attrs \\ %{}) do
+
+    currency |> dbg()
+
     %DebitAccount{}
     |> DebitAccount.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:user, user)
+    |> Ecto.Changeset.put_assoc(:currency, currency) # TODO: fix currency association
     |> Repo.insert()
   end
 
