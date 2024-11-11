@@ -11,7 +11,7 @@ defmodule BudgetTracker.DebitAccounts.DebitAccount do
     field :amount, :float
     field :type, Ecto.Enum, values: [:card, :cash, :deposit, :saving]
     belongs_to :user, User
-    has_one :currency, Currency
+    belongs_to :currency, Currency
 
     timestamps(type: :utc_datetime)
   end

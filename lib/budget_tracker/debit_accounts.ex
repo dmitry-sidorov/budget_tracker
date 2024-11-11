@@ -20,7 +20,7 @@ defmodule BudgetTracker.DebitAccounts do
 
   """
   def list_debit_accounts do
-    Repo.all(DebitAccount)
+    Repo.all(DebitAccount) |> Repo.preload([:user, :currency])
   end
 
   @doc """
@@ -52,13 +52,10 @@ defmodule BudgetTracker.DebitAccounts do
 
   """
   def create_debit_account(%User{} = user, %Currency{} = currency, attrs \\ %{}) do
-
-    currency |> dbg()
-
     %DebitAccount{}
     |> DebitAccount.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:user, user)
-    |> Ecto.Changeset.put_assoc(:currency, currency) # TODO: fix currency association
+    |> Ecto.Changeset.put_assoc(:currency, currency)
     |> Repo.insert()
   end
 

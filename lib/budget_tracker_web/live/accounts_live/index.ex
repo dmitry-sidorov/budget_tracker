@@ -1,4 +1,5 @@
 defmodule BudgetTrackerWeb.DebitAccountsLive do
+  alias BudgetTracker.DebitAccounts
   use BudgetTrackerWeb, :live_view
 
   embed_templates "components/*"
@@ -116,6 +117,8 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
   end
 
   def mount(_params, _session, socket) do
+    DebitAccounts.list_debit_accounts() |> dbg()
+
     socket =
       assign(socket, show_new_payment_modal: false)
       |> assign(show_new_income_modal: false)
