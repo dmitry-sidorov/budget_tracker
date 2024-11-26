@@ -96,7 +96,8 @@ defmodule BudgetTrackerWeb do
           hide_modal: 2,
           show_modal: 1,
           show_modal: 2,
-          delete_icon: 1
+          delete_icon: 1,
+          edit_icon: 1
         ]
 
       import BudgetTrackerWeb.Gettext
