@@ -1,29 +1,23 @@
 defmodule BudgetTrackerWeb.DebitAccountsLive do
-  alias BudgetTracker.DebitAccounts
+  alias BudgetTrackerWeb.AccountsLive.Components.AccountCard
   use BudgetTrackerWeb, :live_view
 
-  embed_templates "components/*"
+  # embed_templates "components/*"
 
   @new_income_modal_name "new-income-modal"
   @new_payment_modal_name "new-payment-modal"
 
-  attr :amount, :float, required: true
-  attr :currency, :string, required: true
-  attr :title, :string, required: true
-  attr :debit_account_id, :integer, default: 999
-  attr :new_income_modal_name, :string, default: @new_income_modal_name
-  attr :new_payment_modal_name, :string, default: @new_payment_modal_name
-  def account_card(assigns)
-
-  def handle_event(@new_income_modal_name, unsigned_params, socket) do
+  def handle_event("on_income", unsigned_params, socket) do
     IO.puts("Add income event!")
     unsigned_params
+    socket = assign(socket, income_modal_visible?: true)
     socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
   end
 
   def handle_event(@new_payment_modal_name, unsigned_params, socket) do
     IO.puts("Add payment event!")
+    show_modal(%JS{}, "new-payment-modal")
     socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
   end
@@ -34,7 +28,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
     {:noreply, socket}
   end
 
-  def handle_event("delete_debit_account", unsigned_params, socket) do
+  def handle_event("on_delete_account", unsigned_params, socket) do
     IO.puts("delete_debit_account!")
     unsigned_params
     {:noreply, socket}
@@ -44,12 +38,25 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
     ~H"""
     <div class="flex flex-col items-center gap-5">
       <div class="mx-auto max-w-sm flex flex-col items-center gap-5">
-        <.account_card amount={50.0} currency="USD" title="Запас" debit_account_id={42} />
-        <.account_card
+        <.live_component
+          module={AccountCard}
+          .account_card
+          amount={50.0}
+          currency="USD"
+          title="Запас"
+          debit_account_id={42}
+          id={42}
+          on_delete_callback_name="on_delete_account"
+          phx-click={show_modal(@new_income_modal_name)}
+        />
+        <.live_component
+          module={AccountCard}
           amount={500.0}
           currency="BYN"
           title="Текущий аккаунт"
           debit_account_id={999}
+          id={999}
+          on_delete_callback_name="on_delete_account"
         />
         <.link patch={~p"/debit_accounts/new"}>
           <.button color="primary" phx-click="add_debit_account">Add new debit account</.button>
@@ -83,7 +90,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
           </:actions>
         </.simple_form>
       </.modal>
-      <.modal rounded="medium" title="New payment" id={@new_payment_modal_name}>
+      <.modal rounded="medium" title="New payment" id="new-payment-modal">
         <.simple_form for={@new_payment_form}>
           <.input field={@new_payment_form[:title]} type="text" label="Title" required />
           <.input field={@new_payment_form[:amount]} type="text" label="Initial amount" required />
@@ -125,6 +132,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
       |> assign(debit_account_id: nil)
       |> assign(new_income_modal_name: @new_income_modal_name)
       |> assign(new_payment_modal_name: @new_payment_modal_name)
+      |> assign(income_modal_visible?: false)
       |> assign(
         :new_income_form,
         to_form(
