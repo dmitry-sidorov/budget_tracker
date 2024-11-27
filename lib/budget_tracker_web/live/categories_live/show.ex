@@ -1,4 +1,5 @@
 defmodule BudgetTrackerWeb.CategoriesLive.Show do
+  alias BudgetTracker.OperationCategories.OperationCategory
   use BudgetTrackerWeb, :live_view
   alias BudgetTracker.OperationCategories
 
@@ -33,6 +34,14 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
     {:noreply, socket}
   end
 
+  defp get_category_badge_color(%OperationCategory{purpose: purpose}) do
+    case purpose do
+      :primary -> "success"
+      :secondary -> "info"
+      :not_mandatory -> "dawn"
+    end
+  end
+
   def render(assigns) do
     assigns.categories |> dbg()
 
@@ -51,9 +60,13 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
           <%= header_title %>
         </:header>
         <.tr :for={category <- @categories}>
-          <.td><%= category.title %></.td>
           <.td>
-            <%= category.purpose %>
+            <%= category.title %>
+          </.td>
+          <.td>
+            <.badge size="medium" color={get_category_badge_color(category)}>
+              <%= category.purpose %>
+            </.badge>
           </.td>
           <.td class="flex gap-4">
             <div class="flex gap-4 w-8">
