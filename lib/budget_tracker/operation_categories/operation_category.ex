@@ -6,7 +6,7 @@ defmodule BudgetTracker.OperationCategories.OperationCategory do
   @foreign_key_type :binary_id
   schema "operation_categories" do
     field :title, :string
-    field :purpose, Ecto.Enum, values: [:primary, :secondary]
+    field :purpose, Ecto.Enum, values: [:primary, :secondary, :not_mandatory]
 
     timestamps(type: :utc_datetime)
   end

@@ -46,8 +46,6 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
           title="Запас"
           debit_account_id={42}
           id={42}
-          on_delete_callback_name="on_delete_account"
-          phx-click={show_modal(@new_income_modal_name)}
         />
         <.live_component
           module={AccountCard}
@@ -56,7 +54,6 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
           title="Текущий аккаунт"
           debit_account_id={999}
           id={999}
-          on_delete_callback_name="on_delete_account"
         />
         <.link patch={~p"/debit_accounts/new"}>
           <.button color="primary" phx-click="add_debit_account">Add new debit account</.button>

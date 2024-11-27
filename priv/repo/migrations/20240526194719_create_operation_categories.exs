@@ -3,7 +3,7 @@ defmodule BudgetTracker.Repo.Migrations.CreateOperationCategories do
   import EctoEnumMigration
 
   def change do
-    create_type(:operation_category_purpose, [:primary, :secondary])
+    create_type(:operation_category_purpose, [:primary, :secondary, :not_mandatory])
 
     create table(:operation_categories, primary_key: false) do
       add :id, :binary_id, primary_key: true
