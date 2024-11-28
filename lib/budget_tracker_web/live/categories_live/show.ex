@@ -42,6 +42,10 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
     end
   end
 
+  defp get_category_purpose(%OperationCategory{purpose: purpose}) do
+    Atom.to_string(purpose) |> String.replace("_", " ")
+  end
+
   def render(assigns) do
     assigns.categories |> dbg()
 
@@ -65,7 +69,7 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
           </.td>
           <.td>
             <.badge size="medium" color={get_category_badge_color(category)}>
-              <%= category.purpose %>
+              <%= get_category_purpose(category) %>
             </.badge>
           </.td>
           <.td class="flex gap-4">
