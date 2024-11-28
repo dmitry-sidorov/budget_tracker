@@ -1,5 +1,5 @@
 defmodule BudgetTracker.DebitAccounts.DebitAccount do
-  alias BudgetTracker.{Currencies.Currency, Accounts.User}
+  alias BudgetTracker.{Currencies.Currency, Accounts.User, Operations.Operation}
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -12,6 +12,7 @@ defmodule BudgetTracker.DebitAccounts.DebitAccount do
     field :type, Ecto.Enum, values: [:card, :cash, :deposit, :saving]
     belongs_to :user, User
     belongs_to :currency, Currency
+    has_many :operations, Operation
 
     timestamps(type: :utc_datetime)
   end
