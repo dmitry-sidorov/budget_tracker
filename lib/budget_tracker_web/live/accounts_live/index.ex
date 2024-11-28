@@ -60,6 +60,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
         </.link>
       </div>
       <.modal title="New income" id={@new_income_modal_name}>
+        <%!-- TODO: merge income and payment forms and move it to operations live page --%>
         <.simple_form for={@new_income_form}>
           <.input_field field={@new_income_form[:title]} type="text" label="Title" required />
           <.input field={@new_income_form[:amount]} type="text" label="Initial amount" required />

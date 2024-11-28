@@ -46,10 +46,10 @@ jobs:
         image: postgres:latest
         ports: ["5432:5432"]
         env:
-          POSTGRES_USER: x_budget
-          POSTGRES_PASSWORD: blork_erlang
+          POSTGRES_USER: bd_tracker
+          POSTGRES_PASSWORD: bd_tracker
           POSTGRES_HOST_AUTH_METHOD: "trust"
-          POSTGRES_DB: x_budget_backend_test
+          POSTGRES_DB: bd_tracker_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -108,3 +108,5 @@ jobs:
         run: mix deps.compile
       - name: Check formatted
         run: mix format --check-formatted
+      - name: Check codestyle
+        run: mix credo
