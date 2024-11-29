@@ -36,7 +36,9 @@ defmodule BudgetTracker.OperationsTest do
       operation = operation_fixture()
       update_attrs = %{type: "some updated type", amount: 456.7}
 
-      assert {:ok, %Operation{} = operation} = Operations.update_operation(operation, update_attrs)
+      assert {:ok, %Operation{} = operation} =
+               Operations.update_operation(operation, update_attrs)
+
       assert operation.type == "some updated type"
       assert operation.amount == 456.7
     end

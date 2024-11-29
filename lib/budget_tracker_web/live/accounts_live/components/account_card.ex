@@ -7,8 +7,6 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
 
   def handle_event(@income_event, _unsigned_params, socket) do
     IO.puts("[LIVE COMPONENT] Add income event!")
-    socket.assigns.id |> dbg()
-
     # socket = assign(socket, visible: true)
     # socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
@@ -16,14 +14,12 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
 
   def handle_event(@payment_event, _unsigned_params, socket) do
     IO.puts("[LIVE COMPONENT] Add payment event!")
-    socket.assigns.id |> dbg()
     # socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
   end
 
   def handle_event(@delete_event, _unsigned_params, socket) do
     IO.puts("[LIVE COMPONENT] Delete account event!")
-    socket.assigns.id |> dbg()
     # socket = assign(socket, debit_account_id: unsigned_params["payload"])
     {:noreply, socket}
   end
@@ -45,8 +41,6 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
   attr :on_delete_callback_name, :string, required: true
 
   def render(assigns) do
-    assigns.event_names |> dbg()
-
     ~H"""
     <div>
       <.card class="box-content flex items-center border-1 border-black h-36 w-fit rounded-xl bg-slate-200">

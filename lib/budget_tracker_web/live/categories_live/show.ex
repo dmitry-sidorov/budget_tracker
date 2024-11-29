@@ -25,12 +25,10 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
   end
 
   def handle_event("edit", unsigned_params, socket) do
-    unsigned_params |> dbg()
     {:noreply, socket}
   end
 
   def handle_event("delete", unsigned_params, socket) do
-    unsigned_params |> dbg()
     {:noreply, socket}
   end
 
@@ -47,8 +45,6 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
   end
 
   def render(assigns) do
-    assigns.categories |> dbg()
-
     ~H"""
     <div class="flex flex-col gap-4">
       <.button class="w-48" color="primary" phx-click={show_modal(@create_category_modal)}>

@@ -19,15 +19,15 @@
     >
       +1 Income
     </.button>
-    <.button
-      color="info"
-      class="h-12 w-36 rounded-lg"
-      phx-value-payload={@debit_account_id}
-    >
+    <.button color="info" class="h-12 w-36 rounded-lg" phx-value-payload={@debit_account_id}>
       +1 Payment
     </.button>
   </div>
-  <div class="mr-4 cursor-pointer" phx-click="delete_debit_account" phx-value-payload={@debit_account_id}>
+  <div
+    class="mr-4 cursor-pointer"
+    phx-click="delete_debit_account"
+    phx-value-payload={@debit_account_id}
+  >
     <.delete_icon />
   </div>
 </.card>
