@@ -1,4 +1,5 @@
 defmodule BudgetTrackerWeb.UserAuth do
+  @moduledoc false
   use BudgetTrackerWeb, :verified_routes
 
   import Plug.Conn

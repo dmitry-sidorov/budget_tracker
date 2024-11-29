@@ -1,4 +1,7 @@
 defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
+  @moduledoc """
+    LiveComponent for Debit Account Card
+  """
   use BudgetTrackerWeb, :live_component
 
   @income_event "income_event"

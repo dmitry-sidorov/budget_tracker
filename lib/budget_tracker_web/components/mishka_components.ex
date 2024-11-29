@@ -1,4 +1,8 @@
 defmodule BudgetTrackerWeb.Components.MishkaComponents do
+  @moduledoc """
+    Import of Miska Component UI library
+    See details: https://mishka.tools/chelekom/docs
+  """
   defmacro __using__(_) do
     quote do
       import BudgetTrackerWeb.Components.Accordion, only: [accordion: 1, native_accordion: 1]

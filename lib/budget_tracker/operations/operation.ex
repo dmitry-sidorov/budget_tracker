@@ -1,4 +1,10 @@
 defmodule BudgetTracker.Operations.Operation do
+  @moduledoc """
+    Model of operation with money.
+    Income is an operation with type :increase
+    Payment is an operation with type :descrease
+    Transfer from one debit account to another is a transaction of two: income + payment.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,5 @@
 defmodule BudgetTracker.Accounts.User do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   alias BudgetTracker.{DebitAccounts.DebitAccount, Operations.Operation}

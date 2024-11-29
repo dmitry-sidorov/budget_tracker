@@ -1,4 +1,7 @@
 defmodule BudgetTracker.OperationCategories.OperationCategory do
+  @moduledoc """
+    Category helps to separate operations by purpose and target of payment.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias BudgetTracker.Operations.Operation

@@ -1,4 +1,8 @@
 defmodule BudgetTracker.DebitAccounts.DebitAccount do
+  @moduledoc """
+  Debit account shows current amount of money in proper currency.
+  User can have multiple debit accounts, of course.
+  """
   alias BudgetTracker.{Currencies.Currency, Accounts.User, Operations.Operation}
   use Ecto.Schema
   import Ecto.Changeset

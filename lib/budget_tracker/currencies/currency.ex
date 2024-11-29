@@ -1,4 +1,7 @@
 defmodule BudgetTracker.Currencies.Currency do
+  @moduledoc """
+  Money currency in common sense.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias BudgetTracker.{DebitAccounts.DebitAccount, Operations.Operation}

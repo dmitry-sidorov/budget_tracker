@@ -1,4 +1,5 @@
 defmodule BudgetTracker.Accounts.UserNotifier do
+  @moduledoc false
   import Swoosh.Email
 
   alias BudgetTracker.Mailer
