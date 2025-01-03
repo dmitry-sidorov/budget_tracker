@@ -19,7 +19,8 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
   end
 
   def handle_event("create_category", unsigned_params, socket) do
-    # unsigned_params |> dbg()
+    unsigned_params |> dbg()
+    # OperationCategories.create_operation_category(unsigned_params)
 
     {:noreply, socket}
   end
@@ -57,11 +58,11 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
         rows_border="extra_small"
       >
         <:header :for={header_title <- ["Title", "Purpose", "Actions"]} class="bg-slate-200">
-          <%= header_title %>
+          {header_title}
         </:header>
-        <.tr :for={category <- @categories}>
+        <.tr :for={%OperationCategory{id: id, title: title} = category <- @categories}>
           <.td>
-            <%= category.title %>
+            {title}
           </.td>
           <.td>
             <.badge size="medium" color={get_category_badge_color(category)}>
@@ -70,10 +71,10 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
           </.td>
           <.td class="flex gap-4">
             <div class="flex gap-4 w-8">
-              <span class="my-auto cursor-pointer" phx-click="edit" phx-value-category={category.id}>
+              <span class="my-auto cursor-pointer" phx-click="edit" phx-value-category={id}>
                 <.edit_icon />
               </span>
-              <span class="my-auto cursor-pointer" phx-click="delete" phx-value-category={category.id}>
+              <span class="my-auto cursor-pointer" phx-click="delete" phx-value-category={id}>
                 <.delete_icon />
               </span>
             </div>

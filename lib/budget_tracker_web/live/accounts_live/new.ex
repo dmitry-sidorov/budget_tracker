@@ -1,5 +1,4 @@
-defmodule BudgetTrackerWeb.NewDebitAccountLive do
-  alias BudgetTracker.DebitAccounts.DebitAccount
+defmodule BudgetTrackerWeb.DebitAccountsLive.New do
   alias BudgetTracker.DebitAccounts
   use BudgetTrackerWeb, :live_view
   alias BudgetTracker.Currencies

@@ -37,7 +37,7 @@ defmodule BudgetTracker.DebitAccounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_debit_account!(id), do: Repo.get!(DebitAccount, id)
+  def get_debit_account!(id), do: Repo.get!(DebitAccount, id) |> Repo.preload([:currency])
 
   @doc """
   Creates a debit_account.

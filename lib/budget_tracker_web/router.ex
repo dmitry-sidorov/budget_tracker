@@ -68,8 +68,9 @@ defmodule BudgetTrackerWeb.Router do
       on_mount: [{BudgetTrackerWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-      live "/debit_accounts", DebitAccountsLive, :index
-      live "/debit_accounts/new", NewDebitAccountLive, :index
+      live "/debit_accounts", DebitAccountsLive.List, :index
+      live "/debit_accounts/new", DebitAccountsLive.New, :new
+      live "/debit_accounts/show/:id", DebitAccountsLive.Show, :show
       live "/categories", CategoriesLive.Show, :show
     end
   end
