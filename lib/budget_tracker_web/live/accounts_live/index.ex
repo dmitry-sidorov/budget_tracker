@@ -1,5 +1,6 @@
 defmodule BudgetTrackerWeb.DebitAccountsLive do
   alias BudgetTrackerWeb.AccountsLive.Components.AccountCard
+  alias BudgetTracker.DebitAccounts
   use BudgetTrackerWeb, :live_view
 
   # embed_templates "components/*"
@@ -39,28 +40,20 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
     <div class="flex flex-col items-center gap-5">
       <div class="mx-auto max-w-sm flex flex-col items-center gap-5">
         <.live_component
+          :for={account <- @debit_accounts}
           module={AccountCard}
-          .account_card
-          amount={50.0}
-          currency="USD"
-          title="Запас"
-          debit_account_id={42}
-          id={42}
-        />
-        <.live_component
-          module={AccountCard}
-          amount={500.0}
-          currency="BYN"
-          title="Текущий аккаунт"
-          debit_account_id={999}
-          id={999}
+          amount={account.amount}
+          currency={account.currency.title}
+          title={account.title}
+          debit_account_id={account.id}
+          id={account.id}
         />
         <.link patch={~p"/debit_accounts/new"}>
           <.button color="primary" phx-click="add_debit_account">Add new debit account</.button>
         </.link>
       </div>
+      <%!-- TODO: merge income and payment forms and move it to operations live page --%>
       <.modal title="New income" id={@new_income_modal_name}>
-        <%!-- TODO: merge income and payment forms and move it to operations live page --%>
         <.simple_form for={@new_income_form}>
           <.input_field field={@new_income_form[:title]} type="text" label="Title" required />
           <.input field={@new_income_form[:amount]} type="text" label="Initial amount" required />
@@ -159,6 +152,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive do
         )
       )
       |> assign(show: false)
+      |> assign(debit_accounts: DebitAccounts.list_debit_accounts())
 
     {:ok, socket}
   end
