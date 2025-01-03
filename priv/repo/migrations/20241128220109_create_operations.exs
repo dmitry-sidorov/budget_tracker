@@ -3,7 +3,7 @@ defmodule BudgetTracker.Repo.Migrations.CreateOperations do
   import EctoEnumMigration
 
   def change do
-    create_type(:operation_type, [:increase, :descrease])
+    create_type(:operation_type, [:increase, :decrease])
 
     create table(:operations, primary_key: false) do
       add :id, :binary_id, primary_key: true

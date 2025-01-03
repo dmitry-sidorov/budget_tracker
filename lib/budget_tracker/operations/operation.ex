@@ -2,7 +2,7 @@ defmodule BudgetTracker.Operations.Operation do
   @moduledoc """
     Model of operation with money.
     Income is an operation with type :increase
-    Payment is an operation with type :descrease
+    Payment is an operation with type :decrease
     Transfer from one debit account to another is a transaction of two: income + payment.
   """
   use Ecto.Schema
@@ -19,7 +19,7 @@ defmodule BudgetTracker.Operations.Operation do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "operations" do
-    field :type, Ecto.Enum, values: [:increase, :descrease]
+    field :type, Ecto.Enum, values: [:increase, :decrease]
     field :amount, :float
     belongs_to :user, User
     belongs_to :debit_account, DebitAccount
