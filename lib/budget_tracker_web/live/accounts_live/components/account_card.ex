@@ -9,6 +9,7 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
   @income_event "income_event"
   @payment_event "payment_event"
   @delete_event "delete_event"
+  @delete_popup "delete_popup"
 
   def handle_event(@income_event, _unsigned_params, socket) do
     IO.puts("[LIVE COMPONENT] Add income event!")
@@ -23,19 +24,12 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
     {:noreply, socket}
   end
 
-  def handle_event(@delete_event, %{"id" => id}, socket) do
-    IO.puts("[LIVE COMPONENT] Delete account event!")
-    # debit_account = DebitAccounts.get_debit_account!(id)
-    # {:ok, _} = DebitAccounts.delete_debit_account(debit_account)
-
-    {:noreply, socket}
-  end
-
   def mount(socket) do
     socket =
       assign(socket,
         event_names: %{income: @income_event, payment: @payment_event, delete: @delete_event}
       )
+      |> assign(popup_name: @delete_popup)
 
     {:ok, socket}
   end
@@ -82,33 +76,29 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
             +1 Payment
           </.button>
         </div>
-        <div
-          class="mr-4 cursor-pointer"
-          phx-click={@event_names.delete}
-          phx-target={@myself}
-          phx-value-id={@debit_account_id}
-        >
+        <div class="mr-4 cursor-pointer" phx-click={show_modal(@popup_name)}>
           <.delete_icon />
         </div>
-        <.modal id="delete_popup" title={"Do you want to delete account #{@title}?"}>
-          <:actions>
+        <.modal id={@popup_name} title="Delete account">
+          <div class="mb-8">{"Do you want to delete account #{@title}?"}</div>
+          <div class="flex flex-row justify-center align-items-center gap-4">
             <.button
-              color="danger"
-              phx-submit="Delete"
-              phx-click={show_modal("delete_popup")}
-              class="w-full"
+              class="w-48"
+              color="success"
+              phx-click={JS.push(@event_names.delete) |> hide_modal(@popup_name)}
+              phx-value-id={@debit_account_id}
             >
-              Delete category
+              Delete account
             </.button>
             <.button
+              class="w-48"
               color="danger"
               phx-disable-with="Sending..."
-              class="w-full"
-              phx-click={hide_modal("delete_popup")}
+              phx-click={hide_modal(@popup_name)}
             >
               Cancel
             </.button>
-          </:actions>
+          </div>
         </.modal>
       </.card>
     </div>

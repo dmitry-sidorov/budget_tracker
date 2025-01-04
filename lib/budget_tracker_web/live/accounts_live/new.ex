@@ -45,7 +45,7 @@ defmodule BudgetTrackerWeb.DebitAccountsLive.New do
       debit_account_params
     )
 
-    {:noreply, socket}
+    {:noreply, redirect(socket, to: ~p"/debit_accounts")}
   end
 
   def mount(_params, _session, socket) do
