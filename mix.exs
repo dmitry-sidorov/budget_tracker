@@ -61,7 +61,8 @@ defmodule BudgetTracker.MixProject do
       {:bandit, "~> 1.5"},
       {:mishka_chelekom, "~> 0.0.1", only: :dev},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:ecto_enum_migration, "~> 0.4"}
+      {:ecto_enum_migration, "~> 0.4"},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 
