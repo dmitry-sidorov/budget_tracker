@@ -4,6 +4,8 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
   """
   use BudgetTrackerWeb, :live_component
 
+  alias BudgetTracker.DebitAccounts
+
   @income_event "income_event"
   @payment_event "payment_event"
   @delete_event "delete_event"
@@ -21,9 +23,11 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
     {:noreply, socket}
   end
 
-  def handle_event(@delete_event, _unsigned_params, socket) do
+  def handle_event(@delete_event, %{"id" => id}, socket) do
     IO.puts("[LIVE COMPONENT] Delete account event!")
-    # socket = assign(socket, debit_account_id: unsigned_params["payload"])
+    # debit_account = DebitAccounts.get_debit_account!(id)
+    # {:ok, _} = DebitAccounts.delete_debit_account(debit_account)
+
     {:noreply, socket}
   end
 
@@ -46,8 +50,8 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
   def render(assigns) do
     ~H"""
     <div>
-      <.link patch={~p"/debit_accounts/show/#{@debit_account_id}"}>
-        <.card class="box-content flex items-center border-1 border-black h-36 w-fit rounded-xl bg-slate-200">
+      <.card class="box-content flex items-center border-1 border-black h-36 w-fit rounded-xl bg-slate-200">
+        <.link patch={~p"/debit_accounts/show/#{@debit_account_id}"}>
           <div class="flex flex-col ml-5 min-w-36 sm:min-w-72 max-w-96 shrink">
             <span
               :for={
@@ -59,29 +63,54 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
               <span>{value}</span>
             </span>
           </div>
-          <div class="flex flex-col gap-3 mr-5">
+        </.link>
+        <div class="flex flex-col gap-3 mr-5">
+          <.button
+            color="success"
+            class="h-12 w-36 rounded-lg"
+            phx-click={@event_names.income}
+            phx-target={@myself}
+          >
+            +1 Income
+          </.button>
+          <.button
+            color="info"
+            class="h-12 w-36 rounded-lg"
+            phx-click={@event_names.payment}
+            phx-target={@myself}
+          >
+            +1 Payment
+          </.button>
+        </div>
+        <div
+          class="mr-4 cursor-pointer"
+          phx-click={@event_names.delete}
+          phx-target={@myself}
+          phx-value-id={@debit_account_id}
+        >
+          <.delete_icon />
+        </div>
+        <.modal id="delete_popup" title={"Do you want to delete account #{@title}?"}>
+          <:actions>
             <.button
-              color="success"
-              class="h-12 w-36 rounded-lg"
-              phx-click={@event_names.income}
-              phx-target={@myself}
+              color="danger"
+              phx-submit="Delete"
+              phx-click={show_modal("delete_popup")}
+              class="w-full"
             >
-              +1 Income
+              Delete category
             </.button>
             <.button
-              color="info"
-              class="h-12 w-36 rounded-lg"
-              phx-click={@event_names.payment}
-              phx-target={@myself}
+              color="danger"
+              phx-disable-with="Sending..."
+              class="w-full"
+              phx-click={hide_modal("delete_popup")}
             >
-              +1 Payment
+              Cancel
             </.button>
-          </div>
-          <div class="mr-4 cursor-pointer" phx-click={@event_names.delete} phx-target={@myself}>
-            <.delete_icon />
-          </div>
-        </.card>
-      </.link>
+          </:actions>
+        </.modal>
+      </.card>
     </div>
     """
   end
