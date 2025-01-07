@@ -1,14 +1,21 @@
 defmodule BudgetTrackerWeb.DebitAccountsLive.New do
-  alias BudgetTracker.DebitAccounts
   use BudgetTrackerWeb, :live_view
   alias BudgetTracker.Currencies
+  alias BudgetTracker.DebitAccounts
+  alias BudgetTracker.DebitAccounts.DebitAccount
 
   def render(assigns) do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.simple_form for={@form} phx-submit="create_debit_account">
         <.input field={@form[:title]} type="text" label="Title" required />
-        <.input field={@form[:type]} type="select" label="Type" required options={["card", "cash"]} />
+        <.input
+          field={@form[:type]}
+          type="select"
+          label="Type"
+          required
+          options={DebitAccount.get_field_values(:type)}
+        />
         <.input field={@form[:amount]} type="text" label="Initial amount" required />
         <.input
           field={@form[:currency]}

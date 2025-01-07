@@ -25,14 +25,6 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
     {:noreply, socket}
   end
 
-  # def icon(account_type) do
-  #   case account_type do
-  #     :card -> ~H"""
-  #     <.card_icon>
-  #     """
-  #   end
-  # end
-
   def mount(socket) do
     socket =
       assign(socket,
@@ -43,11 +35,20 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
     {:ok, socket}
   end
 
+  defp icon_type(type) do
+    case type do
+      :card -> :credit_card
+      :cash -> :payments
+      :deposit -> :account_balance
+      :saving -> :savings
+    end
+  end
+
   attr :amount, :float, required: true
   attr :currency, :string, required: true
   attr :id, :integer, required: true
   attr :title, :string, required: true
-  attr :type, :string, required: true
+  attr :type, :atom, required: true
 
   def render(assigns) do
     ~H"""
@@ -55,6 +56,7 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
       <.card class="box-content flex items-center border-1 border-black h-36 w-fit rounded-xl bg-slate-200">
         <.link patch={~p"/debit_accounts/show/#{@id}"}>
           <div class="flex flex-col ml-5 min-w-36 sm:min-w-72 max-w-96 shrink">
+            <.svg_icon variant={icon_type(@type)} />
             <span
               :for={
                 {name, value} <- [{"Account", @title}, {"Amount", @amount}, {"Currency", @currency}]
@@ -85,7 +87,7 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
           </.button>
         </div>
         <div class="mr-4 cursor-pointer" phx-click={show_modal(@popup_name)}>
-          <.delete_icon />
+          <.svg_icon variant={:delete} fill="red" />
         </div>
         <.modal id={@popup_name} title="Delete account">
           <div class="mb-8">{"Do you want to delete account #{@title}?"}</div>

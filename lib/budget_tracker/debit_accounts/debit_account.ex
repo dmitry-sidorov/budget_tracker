@@ -7,13 +7,15 @@ defmodule BudgetTracker.DebitAccounts.DebitAccount do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type_values [:card, :cash, :deposit, :saving]
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "debit_accounts" do
     field :title, :string
     field :last_update, :date
     field :amount, :float
-    field :type, Ecto.Enum, values: [:card, :cash, :deposit, :saving]
+    field :type, Ecto.Enum, values: @type_values
     belongs_to :user, User
     belongs_to :currency, Currency
     has_many :operations, Operation
@@ -27,4 +29,6 @@ defmodule BudgetTracker.DebitAccounts.DebitAccount do
     |> cast(attrs, [:title, :last_update, :amount, :type])
     |> validate_required([:title, :last_update, :amount, :type])
   end
+
+  def get_field_values(:type), do: @type_values
 end

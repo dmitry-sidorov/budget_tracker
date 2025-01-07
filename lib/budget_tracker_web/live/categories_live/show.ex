@@ -72,10 +72,10 @@ defmodule BudgetTrackerWeb.CategoriesLive.Show do
           <.td class="flex gap-4">
             <div class="flex gap-4 w-8">
               <span class="my-auto cursor-pointer" phx-click="edit" phx-value-category={id}>
-                <.edit_icon />
+                <.svg_icon variant={:edit} />
               </span>
               <span class="my-auto cursor-pointer" phx-click="delete" phx-value-category={id}>
-                <.delete_icon />
+                <.svg_icon variant={:delete} fill="red" />
               </span>
             </div>
           </.td>
