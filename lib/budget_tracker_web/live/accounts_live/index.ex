@@ -1,4 +1,5 @@
 defmodule BudgetTrackerWeb.DebitAccountsLive.List do
+  alias ElixirLS.LanguageServer.Providers.Completion.Reducers.Struct
   alias BudgetTrackerWeb.AccountsLive.Components.AccountCard
   alias BudgetTracker.DebitAccounts
   use BudgetTrackerWeb, :live_view
@@ -32,9 +33,9 @@ defmodule BudgetTrackerWeb.DebitAccountsLive.List do
           module={AccountCard}
           amount={account.amount}
           currency={account.currency.title}
-          title={account.title}
-          debit_account_id={account.id}
           id={account.id}
+          title={account.title}
+          type={account.type}
         />
         <.link patch={~p"/debit_accounts/new"}>
           <.button color="primary" phx-click="add_debit_account">Add new debit account</.button>

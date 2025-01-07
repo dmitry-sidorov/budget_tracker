@@ -8,9 +8,10 @@ defmodule BudgetTrackerWeb.DebitAccountsLive.Show do
     <div class="flex flex-col items-center gap-5">
       <div class="mx-auto max-w-sm flex flex-col items-center gap-5">
         <%!-- TODO: make layout pretty --%>
-        <div>Title: {@debit_account.title}</div>
+        <div>Account Title: {@debit_account.title}</div>
         <div>Amount: {@debit_account.amount}</div>
         <div>Currency: {@debit_account.currency.title}</div>
+        <div>Type: {@debit_account.type}</div>
       </div>
     </div>
     """

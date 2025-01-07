@@ -2,6 +2,7 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
   @moduledoc """
     LiveComponent for Debit Account Card
   """
+  alias BudgetTracker.DebitAccounts.DebitAccount
   use BudgetTrackerWeb, :live_component
 
   alias BudgetTracker.DebitAccounts
@@ -24,6 +25,14 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
     {:noreply, socket}
   end
 
+  # def icon(account_type) do
+  #   case account_type do
+  #     :card -> ~H"""
+  #     <.card_icon>
+  #     """
+  #   end
+  # end
+
   def mount(socket) do
     socket =
       assign(socket,
@@ -36,16 +45,15 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
 
   attr :amount, :float, required: true
   attr :currency, :string, required: true
+  attr :id, :integer, required: true
   attr :title, :string, required: true
-  attr :debit_account_id, :integer, default: 999
-  attr :phx_click, :string
-  attr :on_delete_callback_name, :string, required: true
+  attr :type, :string, required: true
 
   def render(assigns) do
     ~H"""
     <div>
       <.card class="box-content flex items-center border-1 border-black h-36 w-fit rounded-xl bg-slate-200">
-        <.link patch={~p"/debit_accounts/show/#{@debit_account_id}"}>
+        <.link patch={~p"/debit_accounts/show/#{@id}"}>
           <div class="flex flex-col ml-5 min-w-36 sm:min-w-72 max-w-96 shrink">
             <span
               :for={
@@ -86,7 +94,7 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
               class="w-48"
               color="success"
               phx-click={JS.push(@event_names.delete) |> hide_modal(@popup_name)}
-              phx-value-id={@debit_account_id}
+              phx-value-id={@id}
             >
               Delete account
             </.button>
