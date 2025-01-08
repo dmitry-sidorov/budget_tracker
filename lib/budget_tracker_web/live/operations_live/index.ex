@@ -1,4 +1,4 @@
-defmodule BudgetTrackerWeb.OperationLive.Index do
+defmodule BudgetTrackerWeb.OperationsLive.Index do
   use BudgetTrackerWeb, :live_view
 
   alias BudgetTracker.Operations

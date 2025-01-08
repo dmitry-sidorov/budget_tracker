@@ -59,7 +59,7 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
             <.svg_icon variant={icon_type(@type)} />
             <span
               :for={
-                {name, value} <- [{"Account", @title}, {"Amount", @amount}, {"Currency", @currency}]
+                {name, value} <- [{"Title", @title}, {"Amount", @amount}, {"Currency", @currency}]
               }
               class="flex flex-col sm:flex-row sm:gap-1"
             >

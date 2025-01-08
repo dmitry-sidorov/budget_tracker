@@ -1,4 +1,4 @@
-defmodule BudgetTrackerWeb.OperationLive.FormComponent do
+defmodule BudgetTrackerWeb.OperationsLive.FormComponent do
   use BudgetTrackerWeb, :live_component
 
   alias BudgetTracker.Operations
