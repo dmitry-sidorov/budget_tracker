@@ -21,8 +21,9 @@ defmodule BudgetTrackerWeb.AccountsLive.Components.AccountCard do
 
   def handle_event(@payment_event, _unsigned_params, socket) do
     IO.puts("[LIVE COMPONENT] Add payment event!")
+
     # socket = assign(socket, debit_account_id: unsigned_params["payload"])
-    {:noreply, socket}
+    {:noreply, redirect(socket, to: ~p"/operations/payment/new")}
   end
 
   def mount(socket) do
