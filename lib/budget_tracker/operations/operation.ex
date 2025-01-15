@@ -19,7 +19,8 @@ defmodule BudgetTracker.Operations.Operation do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "operations" do
-    field :type, Ecto.Enum, values: [:increase, :decrease]
+    field :action, Ecto.Enum, values: [:increase, :decrease]
+    field :type, Ecto.Enum, values: [:real, :planned]
     field :amount, :float
     belongs_to :user, User
     belongs_to :debit_account, DebitAccount
