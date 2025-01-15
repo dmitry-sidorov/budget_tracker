@@ -2,7 +2,7 @@ defmodule BudgetTracker.Accounts.User do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias BudgetTracker.{DebitAccounts.DebitAccount, Operations.Operation}
+  alias BudgetTracker.{DebitAccounts.DebitAccount, Operations.Operation, BudgetPlans.BudgetPlan}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -19,6 +19,7 @@ defmodule BudgetTracker.Accounts.User do
     field :role, Ecto.Enum, values: [:admin, :member], default: :member
     has_many :debit_accounts, DebitAccount
     has_many :operations, Operation
+    has_many :budget_plans, BudgetPlan
 
     timestamps(type: :utc_datetime)
   end
