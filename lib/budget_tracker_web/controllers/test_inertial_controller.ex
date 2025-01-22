@@ -4,6 +4,6 @@ defmodule BudgetTrackerWeb.TestInertialController do
   def index(conn, _params) do
     conn
     |> assign_prop(:text, "Hello world")
-    |> render_inertia("TestPage")
+    |> render_inertia("test-page")
   end
 end

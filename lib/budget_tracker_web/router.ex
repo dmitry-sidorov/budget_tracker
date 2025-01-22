@@ -65,6 +65,8 @@ defmodule BudgetTrackerWeb.Router do
   scope "/", BudgetTrackerWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    get "/test_inertia", TestInertialController, :index
+
     live_session :require_authenticated_user,
       on_mount: [{BudgetTrackerWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
