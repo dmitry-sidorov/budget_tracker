@@ -4,7 +4,7 @@ defmodule BudgetTracker.OperationCategories.OperationCategory do
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias BudgetTracker.Operations.Operation
+  alias BudgetTracker.{Operations.Operation, BudgetCategories.BudgetCategory}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -12,6 +12,7 @@ defmodule BudgetTracker.OperationCategories.OperationCategory do
     field :title, :string
     field :purpose, Ecto.Enum, values: [:primary, :secondary, :not_mandatory]
     has_many :operations, Operation
+    has_many :budget_categories, BudgetCategory
 
     timestamps(type: :utc_datetime)
   end
